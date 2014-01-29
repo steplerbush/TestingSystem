@@ -1,0 +1,152 @@
+@charset "utf-8";
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    text-align: center;
+    background: #A1223F;
+}
+
+#mainOuter { 
+    width: 1100px;
+    margin: 5px auto;
+    text-align: center;
+    background: #000;
+}
+
+#mainInner { 
+    background: #000;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+}
+
+#header {
+    height: 220px;
+    background: #ECFCCF;
+}
+
+#logo {
+    height: 200px;
+    width: 210px;
+    float: left;
+    margin: 10px 10px 10px 20px;
+}
+
+#logoText {
+    float: left;
+    margin-top: 30px;
+    margin-left: 10%;
+    /* font styles apply to text within alt tags */
+    font-family: 'American Typewriter', Courier, monospace;
+    font-size: 65px;
+    color: #005;
+}
+
+#widgetBar {
+    height: 45px;
+    width: 850px;
+    float: right;
+    background: #ECFCCF;
+}
+
+.userInfoWidget {
+    width: fit-content;
+    margin-top: 10px;
+    margin-right: 20px;
+    font-size: small;
+    float: right;
+    line-height: 25px;
+    background: #ECFCCF;
+}
+
+.languageWidget {
+    margin-right: 25px;
+    margin-top: 10px;
+    font-size: small;
+    float: right;
+    line-height: 25px;
+    background: #C9D6B0;
+}
+
+#footer {
+    height: 60px;
+    clear: left;
+    background: #aaa;
+}
+
+hr {
+    border: 0;
+    background-color: #000;
+    height: 2px;
+    width: 100%;
+}
+
+#plainColumn {
+    min-height: 400px;
+    width: 100%;
+    float: left;
+    background: #eee;
+}
+
+#indexLeftColumn {
+    height: 400px;
+    width: 74.75%;
+    float: left;
+    background: #ccc;
+}
+
+#indexDivider {
+    height: 400px;
+    width: 2px;
+    float: left;
+    background: #000;
+}
+
+#indexRightColumn {
+    height: 400px;
+    width: 25%;
+    float: left;
+    background: #eee;
+}
+
+#hrBold {
+    border: 0;
+    background-color: #000;
+    height: 5px;
+    width: 100%;
+}
+
+#langW {
+    height: 16px;
+    width: 24px;
+    float: right;
+    margin: 5px 5px;
+}
+#registerTable{
+    width: 500px;
+    display: inline-table;
+}
+
+#registerLine {
+    height: 45px;
+    display: table-row;
+}
+
+#registerLineText {
+    float: left;
+    width: 50%;
+    display: table-cell;
+}
+
+#registerLineField {
+    float: left;  
+    padding-left: 15px;
+    display: table-cell;
+}
+
+red{
+    color: red;
+}
+
+pp {
+  white-space: pre;
+}
