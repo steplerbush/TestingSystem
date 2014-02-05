@@ -64,8 +64,11 @@ public class RemoveStudentGroupCommand implements ICommand {
             //clear session
             session.removeAttribute(
                     AttributesManager.ATTRIBUTE_SELECTED_STUDENTGROUP);
+            request.removeAttribute(AttributesManager.ATTRIBUTE_ERROR_MESSAGE);
             session.setAttribute(AttributesManager.ATTRIBUTE_GROUPS_LIST,
                     new UserBL(FrontController.getDAOFactory()).getGroupList());
+            request.setAttribute(AttributesManager.ATTRIBUTE_OK_MESSAGE,
+                    MessageManager.REMOVED_STUDENTGROUP_MESSAGE);
             return ConfigurationManager.getInstance().getProperty(
                     ConfigurationManager.ADMIN_HOME_PATH);
         }

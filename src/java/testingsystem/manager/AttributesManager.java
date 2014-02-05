@@ -20,6 +20,7 @@ public class AttributesManager {
     public static final String ATTRIBUTE_ERROR_MESSAGE = "errorMessage";
     public static final String COMMAND_REMOVE_GROUP = "delstudentgroup";
     public static final String COMMAND_ADD_GROUP = "addstudentgroup";
+    public static final String COMMAND_ADD_ADMIN = "addadmin";
     public static final String COMMAND_UNCHECKED_TUTOR_SHOW = "tutorshow";
     public static final String COMMAND_TUTOR_APPROVE = "tutorapprove";
     public static final String COMMAND_SHOW_SELECTED_GROUP = "showstudentgroup";
@@ -63,6 +64,12 @@ public class AttributesManager {
     public static final String PARAM_NAME_TUTOR_INFO = "info";
     public static final String PARAM_NAME_STUDENT_GROUP = "studentgroup";
     public static final String PARAM_NAME_REG_USER_ROLE = "roleradios";
+    
+    public static final String PARAM_ADM_LOGIN = "admlogin";
+    public static final String PARAM_ADM_PASS = "admpassword";
+    public static final String PARAM_ADM_FIRSTNAME = "admfirstname";
+    public static final String PARAM_ADM_SECONDNAME = "admsecondname";
+    public static final String PARAM_ADM_EMAIL = "admemail";
 
     public static final String FILTER_PARAM_ADMIN_AREA = "AdminArea";
     public static final String FILTER_PARAM_TUTOR_AREA = "TutorArea";

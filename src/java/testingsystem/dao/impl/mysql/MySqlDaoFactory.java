@@ -8,13 +8,16 @@ package testingsystem.dao.impl.mysql;
 import testingsystem.dao.intefaces.StudentDAO;
 import testingsystem.dao.DAOFactory;
 import testingsystem.dao.intefaces.AnswerDAO;
+import testingsystem.dao.intefaces.AnswerLocaleDAO;
 import testingsystem.dao.intefaces.GroupTestDAO;
 import testingsystem.dao.intefaces.QuestionDAO;
+import testingsystem.dao.intefaces.QuestionLocaleDAO;
 import testingsystem.dao.intefaces.ResultDAO;
 import testingsystem.dao.intefaces.SiteRoleDAO;
 import testingsystem.dao.intefaces.SiteUserDAO;
 import testingsystem.dao.intefaces.StudentGroupDAO;
 import testingsystem.dao.intefaces.TestDAO;
+import testingsystem.dao.intefaces.TestLocaleDAO;
 import testingsystem.dao.intefaces.TutorDAO;
 
 /**
@@ -71,6 +74,21 @@ public class MySqlDaoFactory extends DAOFactory {
     @Override
     public TutorDAO createTutorDAO() {
         return new MySQLTutorDAO();
+    }
+
+    @Override
+    public TestLocaleDAO createTestLocaleDAO() {
+        return new MySQLTestLocaleDAO();
+    }
+
+    @Override
+    public QuestionLocaleDAO createQuestionLocaleDAO() {
+        return new MySQLQuestionLocaleDAO();
+    }
+
+    @Override
+    public AnswerLocaleDAO createAnswerLocaleDAO() {
+        return new MySQLAnswerLocaleDAO();
     }
 
 }

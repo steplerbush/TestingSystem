@@ -39,6 +39,7 @@ public class MessageManager {
     public static final String DEFAULT_GROUP_REMOVING_ERROR_MESSAGE = "exception.remove.def.group.error.message";
     
     public static final String CREATED_STUDENTGROUP_MESSAGE = "ok.created.studentgroup.message";
+    public static final String CREATE_EMPTY_ADMIN_MESSAGE = "exception.empty.admincreation.message";
 
     public static final String RESULT_CANCEL_ORDER_MESSAGE = "page.main.result.cancel.order.message";
     public static final String RESULT_DELETE_ORDER_MESSAGE = "page.main.result.delete.order.message";
@@ -88,6 +89,8 @@ public class MessageManager {
     private static MessageManager instance;
     public static final String CREATE_EXIST_STUDENTGROUP_MESSAGE = "exception.create.group.exists.error.message";
     public static final String OPERATION_ERROR_MESSAGE = "exception.operation.error.message";
+    public static final String CREATED_ADMIN_MESSAGE = "ok.created.admin.message";
+    public static final String REMOVED_STUDENTGROUP_MESSAGE = "ok.removed.group.message";
 
     private ResourceBundle resourceBundle;
     private HashMap<Locale, ResourceBundle> localeResourceBundle = new HashMap<Locale, ResourceBundle>();

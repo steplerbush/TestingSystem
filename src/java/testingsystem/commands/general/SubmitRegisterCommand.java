@@ -53,9 +53,7 @@ public class SubmitRegisterCommand implements ICommand {
                 String groupString = request.getParameter(
                         AttributesManager.PARAM_NAME_STUDENT_GROUP);
                 //registering the student-user
-                uBL.registerStudent(siteUser, groupString,
-                        (String) session.getAttribute(
-                                AttributesManager.ATTRIBUTE_REG_USER_ROLE));
+                uBL.registerStudent(siteUser, groupString);
                 // if reguser is a tutor
             } else if (session.getAttribute(
                     AttributesManager.ATTRIBUTE_REG_USER_ROLE).equals(
@@ -66,9 +64,7 @@ public class SubmitRegisterCommand implements ICommand {
                 String telephone = request.getParameter(
                         AttributesManager.PARAM_NAME_TELEPHONE);
                 //registering the tutor-user
-                uBL.registerTutor(siteUser, info, telephone,
-                        (String) session.getAttribute(
-                                AttributesManager.ATTRIBUTE_REG_USER_ROLE));
+                uBL.registerTutor(siteUser, info, telephone);
             }
             //removing temporary attributes---???cant invalidate the session?
             session.removeAttribute(AttributesManager.ATTRIBUTE_REG_USER);

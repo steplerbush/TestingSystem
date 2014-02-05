@@ -38,9 +38,6 @@ public class MySQLAnswerDAO implements AnswerDAO, IMySQLQueries{
                     answer.setId(rs.getInt(ID));
                     answer.setQuestionId(rs.getInt(QUESTION_ID));
                     answer.setIsCorrect(rs.getBoolean(IS_CORRECT));
-                    answer.setAnswerText(rs.getString(ANSWER_TEXT));
-                    answer.setAnswerImageAddress(rs.getString(
-                            ANSWER_IMAGE_ADDRESS));
                     answers.add(answer);
                 }
             }
@@ -60,8 +57,6 @@ public class MySQLAnswerDAO implements AnswerDAO, IMySQLQueries{
                         INSERT_INTO_ANSWERS, Statement.RETURN_GENERATED_KEYS);
                 query.setInt(1, answer.getQuestionId());
                 query.setBoolean(2, answer.isCorrect());
-                query.setString(3, answer.getAnswerText());
-                query.setString(4, answer.getAnswerImageAddress());
                 query.executeUpdate();
                 try (ResultSet rs = query.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -86,9 +81,7 @@ public class MySQLAnswerDAO implements AnswerDAO, IMySQLQueries{
                         UPDATE_ANSWERS);
                 query.setInt(1, answer.getQuestionId());
                 query.setBoolean(2, answer.isCorrect());
-                query.setString(3, answer.getAnswerText());
-                query.setString(4, answer.getAnswerImageAddress());
-                query.setInt(5, answer.getId());
+                query.setInt(3, answer.getId());
                 query.executeUpdate();
             }
         } catch (SQLException ex) {

@@ -92,14 +92,7 @@ public class UserBL {
     public List<StudentGroup> getGroupList() {
         return studentGroupDAO.getAllStudentGroups();
     }
-
-//    public void getGroupNNList(List<String> groupNames, List<String> groupNumbers) {
-//        List <StudentGroup> groups = getGroupList();
-//        for (StudentGroup group : groups){
-//            groupNames.add(group.getGroupName());
-//            groupNumbers.add(Integer.toString(group.getGroupNumber()));
-//        }
-//    }
+    
     public int getStudentGroupID(String groupString) {
         List<StudentGroup> groupList = getGroupList();
         for (StudentGroup group : groupList) {
@@ -110,12 +103,22 @@ public class UserBL {
         return -1;
     }
 
+    public void registerAdmin(SiteUser siteUser){
+        for (SiteRole sr : siteRoleDAO.getAllSiteRoles()) {
+            if (sr.getRoleName().equals(AttributesManager.ADMIN_ROLE)) {
+                siteUser.setRoleId(sr.getId());
+                break;
+            }
+        }
+        siteUserDAO.insert(siteUser);
+    }
+    
     public void registerStudent(SiteUser siteUser,
-            String groupString, String role) {
+            String groupString) {
         int groupId = getStudentGroupID(groupString);
         List<SiteRole> ss = siteRoleDAO.getAllSiteRoles();
         for (SiteRole sr : ss) {
-            if (sr.getRoleName().equals(role)) {
+            if (sr.getRoleName().equals(AttributesManager.STUDENT_ROLE)) {
                 siteUser.setRoleId(sr.getId());
                 break;
             }
@@ -127,12 +130,12 @@ public class UserBL {
         studentDAO.insert(s);
     }
 
-    public void registerTutor(SiteUser siteUser, String info, String telephone, String role) {
+    public void registerTutor(SiteUser siteUser, String info, String telephone) {
         Tutor t = new Tutor();
         t.setInfo(info);
         t.setTelephone(telephone);
         for (SiteRole sr : siteRoleDAO.getAllSiteRoles()) {
-            if (sr.getRoleName().equals(role)) {
+            if (sr.getRoleName().equals(AttributesManager.TUTOR_ROLE)) {
                 siteUser.setRoleId(sr.getId());
                 break;
             }

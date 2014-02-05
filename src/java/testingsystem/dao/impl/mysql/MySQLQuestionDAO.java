@@ -39,7 +39,6 @@ class MySQLQuestionDAO implements QuestionDAO, IMySQLQueries {
                     question.setId(rs.getInt(ID));
                     question.setTestId(rs.getInt(TEST_ID));
                     question.setNumber(rs.getInt(QUESTION_NUMBER));
-                    question.setDescription(rs.getString(DESCRIPTION));
                     question.setWeight(rs.getInt(WEIGHT));
                     questions.add(question);
                 }
@@ -62,8 +61,7 @@ class MySQLQuestionDAO implements QuestionDAO, IMySQLQueries {
                         INSERT_INTO_QUESTIONS, Statement.RETURN_GENERATED_KEYS);
                 query.setInt(1, question.getTestId());
                 query.setInt(2, question.getNumber());
-                query.setString(3, question.getDescription());
-                query.setInt(4, question.getWeight());
+                query.setInt(3, question.getWeight());
                 query.executeUpdate();
                 try (ResultSet rs = query.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -88,9 +86,8 @@ class MySQLQuestionDAO implements QuestionDAO, IMySQLQueries {
                         = myConnection.prepareStatement(UPDATE_QUESTIONS);
                 query.setInt(1, question.getTestId());
                 query.setInt(2, question.getNumber());
-                query.setString(3, question.getDescription());
-                query.setInt(4, question.getWeight());
-                query.setInt(5, question.getId());
+                query.setInt(3, question.getWeight());
+                query.setInt(4, question.getId());
                 query.executeUpdate();
             } finally {
                 connPool.returnConnection(myConnection);

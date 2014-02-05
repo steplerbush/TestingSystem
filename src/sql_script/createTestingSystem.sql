@@ -76,12 +76,21 @@ create table student
 INSERT INTO student (group_id, user_id) VALUES 
  ('1', '2');
 
+DROP TABLE IF EXISTS lang;
+create table lang
+(
+    id INT AUTO_INCREMENT not null,
+    loccode varchar(7) not null,
+    primary key (id)
+)DEFAULT CHARSET=utf8;
+
+insert into lang (loccode) values
+('en-US'), ('ru-RU'), ('ua-UA');
+
 DROP TABLE IF EXISTS tests;
 create table tests
 (
     id INT AUTO_INCREMENT not null,
-    title varchar(150) not null,
-    description TEXT,
     open_time TIMESTAMP,
     close_time TIMESTAMP,
     duration TIME,
@@ -90,25 +99,60 @@ create table tests
     FOREIGN KEY (tutor_id) REFERENCES tutor(id)
 )DEFAULT CHARSET=utf8;
 
-INSERT INTO tests (title, description, open_time, close_time, duration, tutor_id) VALUES 
- ('Tested test', 'description blablabla', '2013-06-04 22:00:00', '2014-06-04 22:00:00', '00:40:00', '1');
+INSERT INTO tests (open_time, close_time, duration, tutor_id) VALUES 
+ ('2013-06-04 22:00:00', '2014-06-04 22:00:00', '00:40:00', '1');
+
+DROP TABLE IF EXISTS testlocale;
+create table testlocale
+(
+    id INT AUTO_INCREMENT not null,
+    test_id int not null,
+    lang_id int not null,
+    title varchar(150) not null,
+    description TEXT,
+    primary key (id),
+    FOREIGN KEY (test_id) REFERENCES tests(id),
+    FOREIGN KEY (lang_id) REFERENCES lang(id)
+)DEFAULT CHARSET=utf8;
+
+INSERT INTO testlocale (test_id, lang_id, title, description) VALUES 
+ ('1','1','Tested test', 'description blablabla in english');
+
 
 DROP TABLE IF EXISTS questions;
 create table questions
 (
     id INT AUTO_INCREMENT not null,
     test_id INT not null,
-    q_number INT, 
-    description TEXT not null,
+    q_number INT,
     weight int not null,
+    partedrating boolean not null,         
     primary key (id),
     FOREIGN KEY (test_id) REFERENCES tests(id)
 )DEFAULT CHARSET=utf8;
 
-INSERT INTO questions (test_id, q_number, description, weight) VALUES 
- ('1', '1', 'Question 1', '2'),
- ('1', '2', 'Question 2', '3'),
- ('1', '3', 'Question 3', '3');
+INSERT INTO questions (test_id, q_number, weight, partedrating) VALUES 
+ ('1', '1', '2', '1'),
+ ('1', '2', '3', '0'),
+ ('1', '3', '3', '1');
+
+DROP TABLE IF EXISTS questionlocale;
+create table questionlocale
+(
+    id INT AUTO_INCREMENT not null,
+    question_id int not null,
+    lang_id int not null,
+    description TEXT not null,
+    image_src text,
+    primary key (id),
+    FOREIGN KEY (question_id) REFERENCES questions(id),
+    FOREIGN KEY (lang_id) REFERENCES lang(id)
+)DEFAULT CHARSET=utf8;
+
+INSERT INTO questionlocale (question_id, lang_id, description, image_src) VALUES 
+ ('1','1','Question 1 test 1', 'C:/blabla1.jpg'),
+ ('2','1','Question 2 test 1', 'C:/blabla2.jpg'),
+ ('3','1','Question 3 test 1', 'C:/blabla3.jpg');
 
 DROP TABLE IF EXISTS answers;
 create table answers
@@ -116,22 +160,45 @@ create table answers
     id INT AUTO_INCREMENT not null,
     question_id INT not null,
     is_correct BOOLEAN not null,
-    answer_text TEXT,
-    answer_image_addr TEXT,
     primary key (id),
     FOREIGN KEY (question_id) REFERENCES questions(id)
 )DEFAULT CHARSET=utf8;
 
-INSERT INTO answers (question_id, is_correct, answer_text) VALUES 
- ('1', '1', 'blablablacorrect'),
- ('1', '0', 'blablabla'),
- ('1', '0', 'blablabla'),
- ('2', '0', 'blablabla'),
- ('2', '1', 'blablablacorrect'),
- ('2', '0', 'blablabla'),
- ('3', '1', 'blablablacorrect'),
- ('3', '0', 'blablabla'),
- ('3', '0', 'blablabla');
+INSERT INTO answers (question_id, is_correct) VALUES 
+ ('1', '1'),
+ ('1', '0'),
+ ('1', '0'),
+ ('2', '1'),
+ ('2', '1'),
+ ('2', '0'),
+ ('3', '1'),
+ ('3', '0'),
+ ('3', '0');
+
+DROP TABLE IF EXISTS answerlocale;
+create table answerlocale
+(
+    id INT AUTO_INCREMENT not null,
+    answer_id int not null,
+    lang_id int not null,
+    answer_text TEXT,
+    image_src TEXT,
+    primary key (id),
+    FOREIGN KEY (answer_id) REFERENCES answers(id),
+    FOREIGN KEY (lang_id) REFERENCES lang(id)
+)DEFAULT CHARSET=utf8;
+
+INSERT INTO answerlocale (answer_id, lang_id, answer_text, image_src) VALUES 
+ ('1','1','answer 1 correct', 'C:/blabla1.jpg'),
+ ('2','1','answer 2 uncorrect', 'C:/blabla2.jpg'),
+ ('3','1','answer 3 uncorrect', 'C:/blabla3.jpg'),
+ ('4','1','answer 1 correct', 'C:/blabla1.jpg'),
+ ('5','1','answer 2 correct', 'C:/blabla2.jpg'),
+ ('6','1','answer 3 uncorrect', 'C:/blabla3.jpg'),
+ ('7','1','answer 1 correct', 'C:/blabla1.jpg'),
+ ('8','1','answer 2 uncorrect', 'C:/blabla2.jpg'),
+ ('9','1','answer 3 uncorrect', 'C:/blabla3.jpg');
+
 
 DROP TABLE IF EXISTS results;
 create table results

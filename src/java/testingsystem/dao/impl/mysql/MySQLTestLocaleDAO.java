@@ -10,36 +10,38 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import testingsystem.dao.DBConnectionPool;
-import testingsystem.dao.intefaces.TestDAO;
-import testingsystem.model.beans.Test;
+import testingsystem.dao.intefaces.TestLocaleDAO;
+import testingsystem.model.beans.TestLocale;
 
 /**
  *
  * @author mirman
  */
-class MySQLTestDAO implements TestDAO, IMySQLQueries {
+class MySQLTestLocaleDAO implements TestLocaleDAO, IMySQLQueries {
 
     private final DBConnectionPool connPool = DBConnectionPool.getInstance();
 
     @Override
-    public List<Test> getAllTests() {
-        List<Test> tests = new ArrayList<>();
+    public TestLocale getTestLocale(int testId, int localeId) {
+        TestLocale testLocale = null;
         try {
             Connection myConnection = connPool.getConnection();
-            try (Statement statement = myConnection.createStatement();
-                    ResultSet rs = statement.executeQuery(SELECT_ALL_TESTS)) {
-                while (rs.next()) {
-                    Test test = new Test();
-                    test.setId(rs.getInt(ID));
-                    test.setOpenTime(rs.getTimestamp(OPEN_TIME));
-                    test.setCloseTime(rs.getTimestamp(CLOSE_TIME));
-                    test.setDuration(rs.getTime(DURATION));
-                    tests.add(test);
+            try (Statement statement = myConnection.createStatement()) {
+                PreparedStatement query
+                        = myConnection.prepareStatement(GET_TESTLOCALE);
+                query.setInt(1, testId);
+                query.setInt(2, localeId);
+                ResultSet rs = query.executeQuery();
+                if (rs.next()) {
+                    testLocale = new TestLocale();
+                    testLocale.setId(rs.getInt(ID));
+                    testLocale.setTestId(rs.getInt(TEST_ID));
+                    testLocale.setLangId(rs.getInt(LANG_ID));
+                    testLocale.setTitle(rs.getString(TITLE));
+                    testLocale.setDescription(rs.getString(DESCRIPTION));
                 }
             } finally {
                 connPool.returnConnection(myConnection);
@@ -47,25 +49,25 @@ class MySQLTestDAO implements TestDAO, IMySQLQueries {
         } catch (SQLException ex) {
             Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
         }
-        return tests;
+        return testLocale;
     }
 
     @Override
-    public int insert(Test test) {
+    public int insert(TestLocale testLocale) {
         int generatedKey = 0;
         try {
             Connection myConnection = connPool.getConnection();
             try (Statement statement = myConnection.createStatement()) {
                 PreparedStatement query = myConnection.prepareStatement(
-                        INSERT_INTO_TESTS, Statement.RETURN_GENERATED_KEYS);
-                query.setTimestamp(1, test.getOpenTime());
-                query.setTimestamp(2, test.getCloseTime());
-                query.setTime(3, test.getDuration());
-                query.setInt(4, test.getTutorId());
+                        INSERT_INTO_TESTLOCALE, Statement.RETURN_GENERATED_KEYS);
+                query.setInt(1, testLocale.getTestId());
+                query.setInt(2, testLocale.getLangId());
+                query.setString(3, testLocale.getTitle());
+                query.setString(4, testLocale.getDescription());
                 query.executeUpdate();
                 try (ResultSet rs = query.getGeneratedKeys()) {
                     if (rs.next()) {
-                        test.setId(generatedKey = rs.getInt(1));
+                        testLocale.setId(generatedKey = rs.getInt(1));
                     }
                 }
             } finally {
@@ -78,17 +80,17 @@ class MySQLTestDAO implements TestDAO, IMySQLQueries {
     }
 
     @Override
-    public void update(Test test) {
+    public void update(TestLocale testLocale) {
         try {
             Connection myConnection = connPool.getConnection();
             try (Statement statement = myConnection.createStatement()) {
-                PreparedStatement query 
-                        = myConnection.prepareStatement(UPDATE_TESTS);
-                query.setTimestamp(1, test.getOpenTime());
-                query.setTimestamp(2, test.getCloseTime());
-                query.setTime(3, test.getDuration());
-                query.setInt(4, test.getTutorId());
-                query.setInt(5, test.getId());
+                PreparedStatement query
+                        = myConnection.prepareStatement(UPDATE_TESTLOCALE);
+                query.setInt(1, testLocale.getTestId());
+                query.setInt(2, testLocale.getLangId());
+                query.setString(3, testLocale.getTitle());
+                query.setString(4, testLocale.getDescription());
+                query.setInt(5, testLocale.getId());
                 query.executeUpdate();
             } finally {
                 connPool.returnConnection(myConnection);
@@ -99,13 +101,13 @@ class MySQLTestDAO implements TestDAO, IMySQLQueries {
     }
 
     @Override
-    public void delete(Test test) {
+    public void delete(TestLocale testLocale) {
         try {
             Connection myConnection = connPool.getConnection();
             try (Statement statement = myConnection.createStatement()) {
-                PreparedStatement query 
-                        = myConnection.prepareStatement(DELETE_TESTS);
-                query.setInt(1, test.getId());
+                PreparedStatement query
+                        = myConnection.prepareStatement(DELETE_TESTLOCALE);
+                query.setInt(1, testLocale.getId());
                 query.executeUpdate();
             } finally {
                 connPool.returnConnection(myConnection);

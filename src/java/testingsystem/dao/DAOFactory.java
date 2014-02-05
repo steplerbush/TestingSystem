@@ -7,15 +7,7 @@ package testingsystem.dao;
 
 import testingsystem.dao.intefaces.StudentDAO;
 import testingsystem.dao.impl.mysql.MySqlDaoFactory;
-import testingsystem.dao.intefaces.AnswerDAO;
-import testingsystem.dao.intefaces.GroupTestDAO;
-import testingsystem.dao.intefaces.QuestionDAO;
-import testingsystem.dao.intefaces.ResultDAO;
-import testingsystem.dao.intefaces.SiteRoleDAO;
-import testingsystem.dao.intefaces.SiteUserDAO;
-import testingsystem.dao.intefaces.StudentGroupDAO;
-import testingsystem.dao.intefaces.TestDAO;
-import testingsystem.dao.intefaces.TutorDAO;
+import testingsystem.dao.intefaces.*;
 
 /**
  *
@@ -24,10 +16,14 @@ import testingsystem.dao.intefaces.TutorDAO;
 public abstract class DAOFactory {
 
     public abstract AnswerDAO createAnswerDAO();
+    
+    public abstract AnswerLocaleDAO createAnswerLocaleDAO();
 
     public abstract GroupTestDAO createGroupTestDAO();
 
     public abstract QuestionDAO createQuestionDAO();
+    
+    public abstract QuestionLocaleDAO createQuestionLocaleDAO();
 
     public abstract ResultDAO createResultDAO();
 
@@ -40,6 +36,8 @@ public abstract class DAOFactory {
     public abstract StudentGroupDAO createStudentGroupDAO();
 
     public abstract TestDAO createTestDAO();
+
+    public abstract TestLocaleDAO createTestLocaleDAO();
 
     public abstract TutorDAO createTutorDAO();
 

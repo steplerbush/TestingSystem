@@ -5,7 +5,6 @@
  */
 package testingsystem.model.beans;
 
-import testingsystem.model.beans.Answer;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,12 +17,9 @@ public class Question implements Serializable {
     private int id;
     private int testId;
     private int number;
-    private String description;
     private int weight;
     private List<Answer> options;
-
-    public Question() {
-    }
+    private QuestionLocale questionLocale;
 
     public int getId() {
         return id;
@@ -49,14 +45,6 @@ public class Question implements Serializable {
         this.number = number;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public int getWeight() {
         return weight;
     }
@@ -71,5 +59,13 @@ public class Question implements Serializable {
 
     public void setOptions(List<Answer> options) {
         this.options = options;
+    }
+
+    public QuestionLocale getQuestionLocale() {
+        return questionLocale;
+    }
+
+    public void setQuestionLocale(QuestionLocale questionLocale) {
+        this.questionLocale = questionLocale;
     }
 }

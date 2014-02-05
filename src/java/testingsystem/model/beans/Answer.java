@@ -16,7 +16,7 @@ public class Answer implements Serializable {
     private int id;
     private int questionId;
     private boolean correct;
-    private String answerText;
+    private AnswerLocale answerLocale;
 
     public Answer() {
     }
@@ -45,20 +45,11 @@ public class Answer implements Serializable {
         this.correct = correct;
     }
 
-    public String getAnswerText() {
-        return answerText;
+    public AnswerLocale getAnswerLocale() {
+        return answerLocale;
     }
 
-    public void setAnswerText(String answerText) {
-        this.answerText = answerText;
+    public void setAnswerLocale(AnswerLocale answerLocale) {
+        this.answerLocale = answerLocale;
     }
-
-    public String getAnswerImageAddress() {
-        return answerImageAddress;
-    }
-
-    public void setAnswerImageAddress(String answerImageAddress) {
-        this.answerImageAddress = answerImageAddress;
-    }
-    private String answerImageAddress;
 }

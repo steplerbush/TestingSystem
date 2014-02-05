@@ -17,11 +17,10 @@ public class Test implements Serializable {
 
     private int id;
     private int tutorId;
-    private String title;
-    private String description;
     private Timestamp openTime;
     private Timestamp closeTime;
     private Time duration;
+    private TestLocale locale;
 
     public Test() {
     }
@@ -40,22 +39,6 @@ public class Test implements Serializable {
 
     public void setTutorId(int tutorId) {
         this.tutorId = tutorId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Timestamp getOpenTime() {
@@ -82,4 +65,11 @@ public class Test implements Serializable {
         this.duration = duration;
     }
 
+    public TestLocale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(TestLocale locale) {
+        this.locale = locale;
+    }
 }

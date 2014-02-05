@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import testingsystem.commands.ICommand;
 import testingsystem.commands.admin.AdminClearSessionCommand;
+import testingsystem.commands.admin.AdminRegisterCommand;
 import testingsystem.commands.admin.CreateStudentGroupCommand;
 import testingsystem.commands.admin.RemoveStudentGroupCommand;
 import testingsystem.commands.admin.ShowSelectedGroupCommand;
@@ -83,6 +84,8 @@ public class RequestHelper {
                 new RemoveStudentGroupCommand());
         this.commandCatalog.put(AttributesManager.COMMAND_ADMIN_CREAL_SESSION,
                 new AdminClearSessionCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_ADD_ADMIN,
+                new AdminRegisterCommand());
 
         // customer commands
 //        this.commandCatalog.put(AttributesManager.COMMAND_BOOKING_ROOM, new BookingRoomCommand());
