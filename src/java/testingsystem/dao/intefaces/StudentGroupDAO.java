@@ -21,4 +21,8 @@ public interface StudentGroupDAO {
     void update(StudentGroup studentGroup);
 
     void delete(StudentGroup studentGroup);
+
+    public StudentGroup getStudentGroup(String name, int number);
+
+    public StudentGroup getStudentGroup(int id);
 }

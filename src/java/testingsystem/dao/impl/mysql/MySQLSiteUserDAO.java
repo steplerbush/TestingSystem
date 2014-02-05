@@ -180,4 +180,33 @@ class MySQLSiteUserDAO implements SiteUserDAO, IMySQLQueries {
         }
         return siteUser;
     }
+
+    @Override
+    public SiteUser getByID(int id) {
+        SiteUser siteUser = null;
+        try {
+            Connection myConnection = connPool.getConnection();
+            try (Statement statement = myConnection.createStatement()) {
+                PreparedStatement query
+                        = myConnection.prepareStatement(GET_SITEUSER_BY_ID);
+                query.setInt(1, id);
+                ResultSet rs = query.executeQuery();
+                if (rs.next()) {
+                    siteUser = new SiteUser();
+                    siteUser.setId(rs.getInt(ID));
+                    siteUser.setFirstName(rs.getString(FIRST_NAME));
+                    siteUser.setSecondName(rs.getString(SECOND_NAME));
+                    siteUser.setEmail(rs.getString(EMAIL));
+                    siteUser.setLogin(rs.getString(LOGIN));
+                    siteUser.setPassword(rs.getString(PASSWORD));
+                    siteUser.setRoleId(rs.getInt(ROLE_ID));
+                }
+            } finally {
+                connPool.returnConnection(myConnection);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
+        }
+        return siteUser;
+    }
 }

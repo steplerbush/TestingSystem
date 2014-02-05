@@ -2,9 +2,7 @@
     <p></p><p>Registration</p><p></p>
     <c:choose>
         <c:when test="${reguser == null}">
-            <c:if test="${errorMessage != null}">
-                <red><h3>${errorMessage}</h3></red>
-                    </c:if>
+            <t:errorTag errorMessage="${errorMessage}"></t:errorTag>
             <form action="site?action=continueregister" method=post>
                 <div id="registerTable">
                     <div id="registerLine">

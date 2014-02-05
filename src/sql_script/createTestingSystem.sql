@@ -58,8 +58,9 @@ create table student_group
 )DEFAULT CHARSET=utf8;
 
 INSERT INTO student_group (group_name, group_number) VALUES 
+ ('default','1'),
  ('IAm', '31'),
- ('default group', '0');
+ ('ZIA', '31');
 
 DROP TABLE IF EXISTS student;
 create table student

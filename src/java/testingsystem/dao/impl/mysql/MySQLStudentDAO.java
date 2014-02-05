@@ -31,8 +31,8 @@ public class MySQLStudentDAO implements StudentDAO, IMySQLQueries {
         List<Student> students = new ArrayList<>();
         try {
             Connection myConnection = connPool.getConnection();
-            try (Statement statement = myConnection.createStatement(); 
-                    ResultSet rs = statement.executeQuery(SELECT_ALL_STUDENTS)){
+            try (Statement statement = myConnection.createStatement();
+                    ResultSet rs = statement.executeQuery(SELECT_ALL_STUDENTS)) {
                 while (rs.next()) {
                     Student student = new Student();
                     student.setId(rs.getInt(ID));
@@ -45,7 +45,7 @@ public class MySQLStudentDAO implements StudentDAO, IMySQLQueries {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
-        } 
+        }
         return students;
     }
 
@@ -70,7 +70,7 @@ public class MySQLStudentDAO implements StudentDAO, IMySQLQueries {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
-        } 
+        }
         return generatedKey;
     }
 
@@ -79,7 +79,7 @@ public class MySQLStudentDAO implements StudentDAO, IMySQLQueries {
         try {
             Connection myConnection = connPool.getConnection();
             try (Statement statement = myConnection.createStatement()) {
-                PreparedStatement query 
+                PreparedStatement query
                         = myConnection.prepareStatement(UPDATE_STUDENTS);
                 query.setInt(1, student.getGroupId());
                 query.setInt(2, student.getUserId());
@@ -98,7 +98,7 @@ public class MySQLStudentDAO implements StudentDAO, IMySQLQueries {
         try {
             Connection myConnection = connPool.getConnection();
             try (Statement statement = myConnection.createStatement()) {
-                PreparedStatement query 
+                PreparedStatement query
                         = myConnection.prepareStatement(DELETE_STUDENTS);
                 query.setInt(1, student.getId());
                 query.executeUpdate();
@@ -108,6 +108,33 @@ public class MySQLStudentDAO implements StudentDAO, IMySQLQueries {
         } catch (SQLException ex) {
             Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
         }
+    }
+
+    @Override
+    public List<Student> getStudentsByGroupId(int groupId) {
+        List<Student> students = new ArrayList<>();
+        try {
+            Connection myConnection = connPool.getConnection();
+            try (Statement statement = myConnection.createStatement()) {
+                PreparedStatement query
+                        = myConnection.prepareStatement(
+                                SELECT_STUDENTS_BY_GROUP_ID);
+                query.setInt(1, groupId);
+                ResultSet rs = query.executeQuery();
+                while (rs.next()) {
+                    Student student = new Student();
+                    student.setId(rs.getInt(ID));
+                    student.setUserId(rs.getInt(USER_ID));
+                    student.setGroupId(rs.getInt(GROUP_ID));
+                    students.add(student);
+                }
+            } finally {
+                connPool.returnConnection(myConnection);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
+        }
+        return students;
     }
 
 }

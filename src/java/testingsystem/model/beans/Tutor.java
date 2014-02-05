@@ -17,6 +17,24 @@ public class Tutor implements Serializable{
     private int userId;
     private String info;
     private String telephone;
+    private SiteUser user;
+    private boolean approved;
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public SiteUser getUser() {
+        return user;
+    }
+
+    public void setUser(SiteUser user) {
+        this.user = user;
+    }
 
     public String getTelephone() {
         return telephone;
@@ -52,4 +70,9 @@ public class Tutor implements Serializable{
     public void setInfo(String info) {
         this.info = info;
     }
+    
+//    @Override
+//    public String toString(){
+//        return Integer.toString(userId);
+//    }
 }

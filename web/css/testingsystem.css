@@ -73,7 +73,7 @@ body {
     background: #aaa;
 }
 
-hr {
+#hrr {
     border: 0;
     background-color: #000;
     height: 2px;
@@ -147,6 +147,37 @@ red{
     color: red;
 }
 
+green {
+    color: green;
+}
+
 pp {
-  white-space: pre;
+    white-space: pre;
+}
+
+#studDiv{
+    display: inline-block;
+    width: 100%;
+    background: #cec1cd;
+}
+
+#admDiv{
+    display: inline-block;
+    width: 100%;
+    background: #cde1ce;
+}
+
+#tutDiv{
+    display: inline-block;
+    width: 100%;
+    background: #d2b0b6;
+}
+
+table{
+    border-spacing: 3px;
+    border-collapse: separate;
+}
+
+td{
+    padding: 10px;
 }

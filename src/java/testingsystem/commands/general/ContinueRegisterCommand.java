@@ -9,8 +9,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 import testingsystem.commands.ICommand;
 import testingsystem.controllers.FrontController;
+import testingsystem.controllers.RequestHelper;
 import testingsystem.manager.AttributesManager;
 import testingsystem.manager.ConfigurationManager;
 import testingsystem.manager.MessageManager;
@@ -24,11 +26,24 @@ import testingsystem.model.bl.UserBL;
  */
 public class ContinueRegisterCommand implements ICommand {
 
+    
+    static {
+        logger = Logger.getLogger(LoginCommand.class);
+    }
+    private static Logger logger;
+    
     @Override
     public String execute(HttpServletRequest request,
             HttpServletResponse response) {
+        if (RequestHelper.isAuthUser(request)) {
+            logger.warn("An authorized user " + ((SiteUser)request.getSession()
+                    .getAttribute(AttributesManager.ATTRIBUTE_USER)).getLogin()
+                    + " tried to register"
+                    + request.getRemoteAddr());
+            return ConfigurationManager.getInstance().getProperty(
+                    ConfigurationManager.INDEX_PAGE_PATH);
+        }
         HttpSession session = request.getSession(true);
-        //session.invalidate();
         //if there is any empty field in the form
         if (request.getParameter(AttributesManager.PARAM_NAME_FIRSTNAME)
                 .equals(AttributesManager.EMPTY_STRING)

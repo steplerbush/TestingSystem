@@ -86,6 +86,7 @@ public interface IMySQLQueries {
             = "select * from siteuser where login = ?";
     public final static String GET_SITEUSER_BY_EMAIL 
             = "select * from siteuser where email = ?";
+    public final static String GET_SITEUSER_BY_ID = "select * from siteuser where id = ?";
     public final static String SELECT_ALL_STUDENTS = "Select * from student";
     public final static String USER_ID = "user_id";
     public final static String INSERT_INTO_STUDENTS
@@ -94,8 +95,14 @@ public interface IMySQLQueries {
             + "Set group_id = ?, user_id = ? where id = ?";
     public final static String DELETE_STUDENTS
             = "DELETE FROM student WHERE id = ?";
+    public final static String SELECT_STUDENTS_BY_GROUP_ID
+            = "Select * from student where group_id = ?";
     public final static String SELECT_ALL_STUDENTGROUPS
             = "Select * from student_group";
+    public final static String GET_STUDENTGROUP_BY_ID
+            = "Select * from student_group where id = ?";
+    public final static String GET_STUDENTGROUP_BY_NAME_NUMBER
+            = "Select * from student_group where group_name = ? and group_number = ?";
     public final static String GROUP_NAME = "group_name";
     public final static String GROUP_NUMBER = "group_number";
     public final static String INSERT_INTO_STUDENTGROUPS = "Insert into "
@@ -119,12 +126,15 @@ public interface IMySQLQueries {
     public final static String DELETE_TESTS
             = "DELETE FROM tests WHERE id = ?";
     public final static String SELECT_ALL_TUTORS = "Select * from tutor";
+    public final static String SELECT_UNCHECKED_TUTORS = "Select * from tutor where is_approved = false";
     public final static String INFO = "info";
     public final static String TELEPHONE = "telephone";
+    public final static String IS_APPROVED ="is_approved";
     public final static String INSERT_INTO_TUTORS
-            = "Insert into tutor (user_id, info, telephone) values (?, ?, ?)";
+            = "Insert into tutor (user_id, info, telephone, is_approved) values (?, ?, ?, ?)";
     public final static String UPDATE_TUTORS 
-            = "Update tutor Set user_id = ?, info = ?, telephone = ? where id = ?";
+            = "Update tutor Set user_id = ?, info = ?, telephone = ?, is_approved = ? where id = ?";
     public final static String DELETE_TUTORS
             = "DELETE FROM tutor WHERE id = ?";
+    public final static String GET_TUTOR_BY_ID = "Select * from tutor where id = ?";
 }

@@ -39,6 +39,32 @@ class MySQLTutorDAO implements TutorDAO, IMySQLQueries {
                     tutor.setUserId(rs.getInt(USER_ID));
                     tutor.setInfo(rs.getString(INFO));
                     tutor.setTelephone(TELEPHONE);
+                    tutor.setApproved(rs.getBoolean(IS_APPROVED));
+                    tutors.add(tutor);
+                }
+            } finally {
+                connPool.returnConnection(myConnection);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
+        }
+        return tutors;
+    }
+
+    @Override
+    public List<Tutor> getUncheckedTutors() {
+        List<Tutor> tutors = new ArrayList<>();
+        try {
+            Connection myConnection = connPool.getConnection();
+            try (Statement statement = myConnection.createStatement();
+                    ResultSet rs = statement.executeQuery(SELECT_UNCHECKED_TUTORS)) {
+                while (rs.next()) {
+                    Tutor tutor = new Tutor();
+                    tutor.setId(rs.getInt(ID));
+                    tutor.setUserId(rs.getInt(USER_ID));
+                    tutor.setInfo(rs.getString(INFO));
+                    tutor.setTelephone(TELEPHONE);
+                    tutor.setApproved(rs.getBoolean(IS_APPROVED));
                     tutors.add(tutor);
                 }
             } finally {
@@ -61,6 +87,7 @@ class MySQLTutorDAO implements TutorDAO, IMySQLQueries {
                 query.setInt(1, tutor.getUserId());
                 query.setString(2, tutor.getInfo());
                 query.setString(3, tutor.getTelephone());
+                query.setBoolean(4, tutor.isApproved());
                 query.executeUpdate();
                 try (ResultSet rs = query.getGeneratedKeys()) {
                     if (rs.next()) {
@@ -81,12 +108,13 @@ class MySQLTutorDAO implements TutorDAO, IMySQLQueries {
         try {
             Connection myConnection = connPool.getConnection();
             try (Statement statement = myConnection.createStatement()) {
-                PreparedStatement query 
+                PreparedStatement query
                         = myConnection.prepareStatement(UPDATE_TUTORS);
                 query.setInt(1, tutor.getUserId());
                 query.setString(2, tutor.getInfo());
                 query.setString(3, tutor.getTelephone());
-                query.setInt(4, tutor.getId());
+                query.setBoolean(4, tutor.isApproved());
+                query.setInt(5, tutor.getId());
                 query.executeUpdate();
             } finally {
                 connPool.returnConnection(myConnection);
@@ -101,7 +129,7 @@ class MySQLTutorDAO implements TutorDAO, IMySQLQueries {
         try {
             Connection myConnection = connPool.getConnection();
             try (Statement statement = myConnection.createStatement()) {
-                PreparedStatement query 
+                PreparedStatement query
                         = myConnection.prepareStatement(DELETE_TUTORS);
                 query.setInt(1, tutor.getId());
                 query.executeUpdate();
@@ -111,6 +139,33 @@ class MySQLTutorDAO implements TutorDAO, IMySQLQueries {
         } catch (SQLException ex) {
             Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
         }
+    }
+
+    @Override
+    public Tutor getById(int id) {
+        Tutor tutor = null;
+        try {
+            Connection myConnection = connPool.getConnection();
+            try (Statement statement = myConnection.createStatement()) {
+                PreparedStatement query
+                        = myConnection.prepareStatement(GET_TUTOR_BY_ID);
+                query.setInt(1, id);
+                ResultSet rs = query.executeQuery();
+                if (rs.next()) {
+                    tutor = new Tutor();
+                    tutor.setId(rs.getInt(ID));
+                    tutor.setUserId(rs.getInt(USER_ID));
+                    tutor.setInfo(rs.getString(INFO));
+                    tutor.setTelephone(rs.getString(TELEPHONE));
+                    tutor.setApproved(rs.getBoolean(IS_APPROVED));
+                }
+            } finally {
+                connPool.returnConnection(myConnection);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
+        }
+        return tutor;
     }
 
 }

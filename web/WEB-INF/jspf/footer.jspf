@@ -1,5 +1,5 @@
 <div id="footer">
-    <hr>
+    <div id="hrr"></div>
     <t:footerTag authorName="Ievgenii Vitriak" authorEmail="steplerbush@gmail.com"/>
 </div>
 <div id="hrBold"/>

@@ -21,8 +21,10 @@ public interface SiteUserDAO {
     void update(SiteUser siteUser);
 
     void delete(SiteUser siteUser);
-    
+
     SiteUser getByUserName(String username);
 
-    public SiteUser getByEmail(String email);
+    SiteUser getByID(int id);
+
+    SiteUser getByEmail(String email);
 }

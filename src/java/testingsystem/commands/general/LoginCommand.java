@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import testingsystem.controllers.FrontController;
+import testingsystem.controllers.RequestHelper;
 import testingsystem.dao.DAOFactory;
 import testingsystem.dao.intefaces.SiteRoleDAO;
 import testingsystem.manager.AttributesManager;
@@ -33,8 +34,13 @@ public class LoginCommand implements ICommand {
     @Override
     public String execute(HttpServletRequest request,
             HttpServletResponse response) {
-
-        //try {
+        if (RequestHelper.isAuthUser(request)) {
+            logger.warn("An authorized user " + ((SiteUser)request.getSession()
+                    .getAttribute(AttributesManager.ATTRIBUTE_USER)).getLogin()
+                    + " tried to login " + request.getRemoteAddr());
+            return ConfigurationManager.getInstance().getProperty(
+                    ConfigurationManager.INDEX_PAGE_PATH);
+        }
         String login = request.getParameter(
                 AttributesManager.PARAM_NAME_LOGIN);
         String password = request.getParameter(
@@ -94,16 +100,8 @@ public class LoginCommand implements ICommand {
                 session.setAttribute(AttributesManager.ATTRIBUTE_LOGIN,
                         login);
             }
-
-//        } catch (DAOException ex) {
-//            logger.error(ex, ex);
-//            request.setAttribute(AttributesManager.ATTRIBUTE_ERROR_MESSAGE, MessageManager.DAO_EXCEPTION_ERROR_MESSAGE);
-//            page = ConfigurationManager.getInstance().getProperty(ConfigurationManager.ERROR_PAGE_PATH);
-//            return page;
-//        }
             return ConfigurationManager.getInstance().getProperty(
                     ConfigurationManager.INDEX_PAGE_PATH);
-
         }
     }
 

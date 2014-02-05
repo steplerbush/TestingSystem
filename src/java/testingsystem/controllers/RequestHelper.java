@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import testingsystem.commands.ICommand;
+import testingsystem.commands.admin.AdminClearSessionCommand;
+import testingsystem.commands.admin.CreateStudentGroupCommand;
+import testingsystem.commands.admin.RemoveStudentGroupCommand;
+import testingsystem.commands.admin.ShowSelectedGroupCommand;
+import testingsystem.commands.admin.TutorApproveCommand;
+import testingsystem.commands.admin.UnckeckedTutorShowCommand;
 import testingsystem.commands.general.*;
 
 /**
@@ -53,8 +59,30 @@ public class RequestHelper {
                 new SubmitRegisterCommand());
         this.commandCatalog.put(AttributesManager.COMMAND_HOME,
                 new HomeCommand());
-        this.commandCatalog.put("test",
-                new TestCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_UNCHECKED_TUTOR_SHOW,
+                new UnckeckedTutorShowCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_TUTOR_APPROVE,
+                new TutorApproveCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_ADD_GROUP,
+                new CreateStudentGroupCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_SHOW_SELECTED_GROUP,
+                new ShowSelectedGroupCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_REMOVE_GROUP,
+                new RemoveStudentGroupCommand());
+
+        //Admin commands
+        this.commandCatalog.put(AttributesManager.COMMAND_UNCHECKED_TUTOR_SHOW,
+                new UnckeckedTutorShowCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_TUTOR_APPROVE,
+                new TutorApproveCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_ADD_GROUP,
+                new CreateStudentGroupCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_SHOW_SELECTED_GROUP,
+                new ShowSelectedGroupCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_REMOVE_GROUP,
+                new RemoveStudentGroupCommand());
+        this.commandCatalog.put(AttributesManager.COMMAND_ADMIN_CREAL_SESSION,
+                new AdminClearSessionCommand());
 
         // customer commands
 //        this.commandCatalog.put(AttributesManager.COMMAND_BOOKING_ROOM, new BookingRoomCommand());
@@ -95,12 +123,7 @@ public class RequestHelper {
      */
     public ICommand getCommand(HttpServletRequest request) {
         String action = request.getParameter(AttributesManager.PARAM_NAME_ACTION);
-        String url = request.getPathInfo();
-        //url = request.getQueryString();
-        //url = request.getRemoteAddr();
-        url = request.getRequestURI();
-        //url = request.getServletPath();
-        //url = request.getServletContext().getContextPath();
+
         logger.info("User '" + request.getSession().
                 getAttribute(AttributesManager.PARAM_NAME_LOGIN)
                 + "'. " + "Request command action: '" + action + "'"
@@ -129,16 +152,6 @@ public class RequestHelper {
             command = new NoCommand();
         } else {
             command = this.commandCatalog.get(action);
-
-            if (this.isAuthUser(request)) {
-                logger.info("User '" + request.getSession().getAttribute(
-                        AttributesManager.PARAM_NAME_LOGIN) + "'. "
-                        + "Process incoming request with following command: "
-                        + command + ". RemoteAddr: " + request.getRemoteAddr());
-
-            } else {
-                command = notAuthUserActionCheck(action, command, request);
-            }
         }
         return command;
     }
@@ -152,25 +165,25 @@ public class RequestHelper {
             logger.info("Not auth user change language: '"
                     + command + "'" + ". RemoteAddr: "
                     + request.getRemoteAddr());
-        //continue register command
+            //continue register command
         } else if (action.equalsIgnoreCase(
                 AttributesManager.COMMAND_CONTINUE_REGISTER)) {
             logger.info("Not auth user continues register: '"
                     + command + "'" + ". RemoteAddr: "
                     + request.getRemoteAddr());
-        //go register command
+            //go register command
         } else if (action.equalsIgnoreCase(
                 AttributesManager.COMMAND_GO_REGISTER)) {
             logger.info("Not auth user begins register: '"
                     + command + "'" + ". RemoteAddr: "
                     + request.getRemoteAddr());
-        //submit register command
+            //submit register command
         } else if (action.equalsIgnoreCase(
                 AttributesManager.COMMAND_SUBMIT_REGISTER)) {
             logger.info("Not auth user submits register: '"
                     + command + "'" + ". RemoteAddr: "
                     + request.getRemoteAddr());
-        //submit login command
+            //submit login command
         } else if (action.equalsIgnoreCase(
                 AttributesManager.COMMAND_SUBMIT_LOGIN)) {
             logger.info("Not auth user tries to log in: '"
@@ -192,23 +205,34 @@ public class RequestHelper {
      * @param request User's request.
      * @return True if an authorized user sends request.
      */
-    public boolean isAuthUser(HttpServletRequest request) {
-        boolean success = false;
-
+    public static boolean isAuthUser(HttpServletRequest request) {
         HttpSession session = request.getSession();
-
         if (session == null) {
-            success = false;
-            return success;
+            return false;
         }
+        return session.getAttribute(
+                AttributesManager.ATTRIBUTE_USER_ROLE) != null;
+    }
 
-        if (session.getAttribute(AttributesManager.ATTRIBUTE_USER_ROLE) != null
-                || session.getAttribute(
-                        AttributesManager.ATTRIBUTE_REG_USER_ROLE) != null) {
-            success = true;
-        } else {
-            session.invalidate();
+    public static boolean isAdminUser(HttpServletRequest request) {
+        return isRoleUser(request, AttributesManager.ADMIN_ROLE);
+    }
+
+    public static boolean isTutorUser(HttpServletRequest request) {
+        return isRoleUser(request, AttributesManager.TUTOR_ROLE);
+    }
+
+    public static boolean isStudentUser(HttpServletRequest request) {
+        return isRoleUser(request, AttributesManager.STUDENT_ROLE);
+    }
+
+    private static boolean isRoleUser(HttpServletRequest request,
+            String userRole) {
+        HttpSession session = request.getSession();
+        if (session == null) {
+            return false;
         }
-        return success;
+        return ((String) session.getAttribute(
+                AttributesManager.ATTRIBUTE_USER_ROLE)).equals(userRole);
     }
 }

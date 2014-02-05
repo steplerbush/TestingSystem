@@ -15,10 +15,14 @@ import testingsystem.model.beans.Tutor;
 public interface TutorDAO {
 
     List<Tutor> getAllTutors();
+    
+    List<Tutor> getUncheckedTutors();
 
     int insert(Tutor tutor);
 
     void update(Tutor tutor);
 
     void delete(Tutor tutor);
+
+    public Tutor getById(int id);
 }

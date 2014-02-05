@@ -8,8 +8,10 @@ package testingsystem.commands.general;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Logger;
 import testingsystem.commands.ICommand;
 import testingsystem.controllers.FrontController;
+import testingsystem.controllers.RequestHelper;
 import testingsystem.manager.AttributesManager;
 import testingsystem.manager.ConfigurationManager;
 import testingsystem.model.beans.SiteUser;
@@ -21,8 +23,22 @@ import testingsystem.model.bl.UserBL;
  */
 public class SubmitRegisterCommand implements ICommand {
 
+    static {
+        logger = Logger.getLogger(LoginCommand.class);
+    }
+    private static Logger logger;
+
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request,
+            HttpServletResponse response) {
+        if (RequestHelper.isAuthUser(request)) {
+            logger.warn("An authorized user " + ((SiteUser) request.getSession()
+                    .getAttribute(AttributesManager.ATTRIBUTE_USER)).getLogin()
+                    + " tried to submit register"
+                    + request.getRemoteAddr());
+            return ConfigurationManager.getInstance().getProperty(
+                    ConfigurationManager.INDEX_PAGE_PATH);
+        }
         HttpSession session = request.getSession();
         //get reg user from session
         SiteUser siteUser = (SiteUser) session.getAttribute(
@@ -40,7 +56,7 @@ public class SubmitRegisterCommand implements ICommand {
                 uBL.registerStudent(siteUser, groupString,
                         (String) session.getAttribute(
                                 AttributesManager.ATTRIBUTE_REG_USER_ROLE));
-            // if reguser is a tutor
+                // if reguser is a tutor
             } else if (session.getAttribute(
                     AttributesManager.ATTRIBUTE_REG_USER_ROLE).equals(
                             AttributesManager.TUTOR_ROLE)) {

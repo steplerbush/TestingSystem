@@ -18,6 +18,12 @@ public class AttributesManager {
     public static final String COMMAND_HOME = "home";
     public static final String COMMAND_CONTINUE_REGISTER = "continueregister";
     public static final String ATTRIBUTE_ERROR_MESSAGE = "errorMessage";
+    public static final String COMMAND_REMOVE_GROUP = "delstudentgroup";
+    public static final String COMMAND_ADD_GROUP = "addstudentgroup";
+    public static final String COMMAND_UNCHECKED_TUTOR_SHOW = "tutorshow";
+    public static final String COMMAND_TUTOR_APPROVE = "tutorapprove";
+    public static final String COMMAND_SHOW_SELECTED_GROUP = "showstudentgroup";
+    public static final String COMMAND_ADMIN_CREAL_SESSION = "adminclearsession";
 
     public static final String ATTRIBUTE_YEAR = "year";
     public static final String ATTRIBUTE_RESULT = "result";
@@ -25,6 +31,7 @@ public class AttributesManager {
 
     public static final String ATTRIBUTE_LOCALE_RU = "ru";
     public static final String ATTRIBUTE_LOCALE_EN = "en";
+    public static final String ATTRIBUTE_OK_MESSAGE = "okMessage";
 
     public static final String ATTRIBUTE_USER = "user";
     public static final String ATTRIBUTE_REG_USER = "reguser";
@@ -37,6 +44,12 @@ public class AttributesManager {
     public static final String ATTRIBUTE_LOGOUT = "logout";
     public static final String ATTRIBUTE_REGISTER = "register";
     public static final String ATTRIBUTE_GROUPS_LIST = "groupslist";
+    public static final String ATTRIBUTE_UNCHECKED_TUTOR = "uncheckedtutor";
+    public static final String ATTRIBUTE_UNCHECKED_TUTORS = "uncheckedtutors";
+    public static final String ATTRIBUTE_SELECT_TUTOR = "seltutor";
+    public static final String ATTRIBUTE_REMOVE_GROUP = "delstudentgroup";
+    public static final String ATTRIBUTE_SELECTED_STUDENTGROUP = "selectedgroup";
+    public static final String ATTRIBUTE_SELECTED_GROUP_STUDENTS = "studentsselgr";
 
     public static final String PARAM_NAME_ACTION = "action";
     public static final String PARAM_NAME_SPECIAL_USER_LOCALE = "specialUserLocale";
@@ -62,6 +75,8 @@ public class AttributesManager {
     public static final String PARAM_NAME_COMMENTARY = "commentary";
 
     public static final String PARAM_NAME_LOCALE = "locale";
+    public static final String PARAM_GROUP_NAME = "groupname";
+    public static final String PARAM_GROUP_NUMBER = "groupnumber";
 
     /**
      * Helper class, so private constructor.

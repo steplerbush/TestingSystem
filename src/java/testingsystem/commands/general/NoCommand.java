@@ -17,13 +17,15 @@ public class NoCommand implements ICommand {
 	 * Just redirects user to the main page.
 	 */
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		String page = ConfigurationManager.getInstance().getProperty(ConfigurationManager.INDEX_PAGE_PATH);
+	public String execute(HttpServletRequest request, 
+                HttpServletResponse response) {
+		String page = ConfigurationManager.getInstance().getProperty(
+                        ConfigurationManager.INDEX_PAGE_PATH);
 		return page;
 	}
 
 	@Override
 	public String toString() {
-		return "NoCommand{" + '}';
+		return "NoCommand{}";
 	}
 }

@@ -16,6 +16,15 @@ public class Student implements Serializable {
     private int id;
     private int groupId;
     private int userId;
+    private SiteUser user;
+
+    public SiteUser getUser() {
+        return user;
+    }
+
+    public void setUser(SiteUser user) {
+        this.user = user;
+    }
 
     public Student() {
     }

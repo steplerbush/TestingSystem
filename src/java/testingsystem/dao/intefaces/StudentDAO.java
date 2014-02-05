@@ -21,4 +21,6 @@ public interface StudentDAO {
     void update(Student student);
 
     void delete(Student student);
+
+    public List<Student> getStudentsByGroupId(int id);
 }
