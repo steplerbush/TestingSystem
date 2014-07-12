@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author mirman
  */
-public class Tutor implements Serializable{
+public class Tutor implements Serializable {
 
     private int id;
     private int userId;
@@ -70,9 +70,4 @@ public class Tutor implements Serializable{
     public void setInfo(String info) {
         this.info = info;
     }
-    
-//    @Override
-//    public String toString(){
-//        return Integer.toString(userId);
-//    }
 }

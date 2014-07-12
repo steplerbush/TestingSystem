@@ -25,7 +25,7 @@
             <t:goregisterTag/>
         </c:when>
         <c:otherwise>
-            <t:loginTag siteuser="${user}"></t:loginTag>
+            <t:loginTag username="${login}"></t:loginTag>
         </c:otherwise>
     </c:choose>
 </div>

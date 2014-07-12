@@ -16,6 +16,7 @@ public class TestLocale {
     private int langId;
     private String title;
     private String description;
+    private String lang;
 
     public TestLocale() {
 
@@ -59,5 +60,13 @@ public class TestLocale {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 }

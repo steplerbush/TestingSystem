@@ -37,61 +37,27 @@ public class MessageManager {
     public static final String NON_AUTH_ACCESS_DENIED_MESSAGE = "exception.nonauth.access.denied.error.message";
     public static final String GO_HOME_ERROR_MESSAGE = "exception.gohome.error.message";
     public static final String DEFAULT_GROUP_REMOVING_ERROR_MESSAGE = "exception.remove.def.group.error.message";
-    
+
     public static final String CREATED_STUDENTGROUP_MESSAGE = "ok.created.studentgroup.message";
     public static final String CREATE_EMPTY_ADMIN_MESSAGE = "exception.empty.admincreation.message";
 
-    public static final String RESULT_CANCEL_ORDER_MESSAGE = "page.main.result.cancel.order.message";
-    public static final String RESULT_DELETE_ORDER_MESSAGE = "page.main.result.delete.order.message";
-    public static final String RESULT_SELECT_ROOM_MESSAGE = "page.main.result.select.room.message";
-    public static final String RESULT_PROCESS_FORM_MESSAGE = "page.main.result.process.form.message";
-
-    public static final String TAG_CREATED = "tag.created";
-    public static final String TAG_CUSTOMER = "tag.customer";
-    public static final String TAG_CREDIT_CARD_NUMBER = "tag.credit.card.number";
-    public static final String TAG_ARRIVAL = "tag.arrival";
-    public static final String TAG_DEPARTURE = "tag.departure";
-    public static final String TAG_ORDER_ID = "tag.order.id";
-    public static final String TAG_ORDER_AMOUNT = "tag.order.amount";
-    public static final String TAG_CUSTOMERS_INFO = "tag.customers.info";
     public static final String TAG_ID = "tag.id";
     public static final String TAG_FIRST_NAME = "tag.first.name";
     public static final String TAG_LAST_NAME = "tag.last.name";
     public static final String TAG_EMAIL = "tag.email";
     public static final String TAG_PHONE = "tag.phone";
     public static final String TAG_ADDRESS = "tag.address";
-    public static final String TAG_ORDER = "tag.order";
-    public static final String TAG_STATUS = "tag.status";
-    public static final String TAG_ROOM = "tag.room";
-    public static final String TAG_ADULT = "tag.adult";
-    public static final String TAG_CHILD = "tag.child";
-    public static final String TAG_NIGHTS = "tag.nights";
-    public static final String TAG_PRICE = "tag.price";
-    public static final String TAG_AMOUNT = "tag.amount";
-    public static final String TAG_ROOM_CLASS = "tag.room.class";
-    public static final String TAG_YOUR_COMMENTARY = "tag.your.commentary";
-    public static final String TAG_CUSTOMER_COMMENTARY = "tag.customer.commentary";
-    public static final String TAG_ACTIONS = "tag.actions";
-    public static final String TAG_FIND_ROOM = "tag.find.room";
-    public static final String TAG_CANCEL = "tag.cancel";
-    public static final String TAG_DELETE = "tag.delete";
-    public static final String TAG_SHOW_BILL = "tag.show.bill";
-    public static final String TAG_ROOMS_INFO = "tag.rooms.info";
-    public static final String TAG_CLASS = "tag.class";
-    public static final String TAG_NIGHT_PRICE = "tag.night.price";
-    public static final String TAG_ADULT_MAX = "tag.adult.max";
-    public static final String TAG_CHILD_MAX = "tag.child.max";
-    public static final String TAG_CREDIT_CARD = "tag.credit.card";
-    public static final String TAG_NO_FREE_ROOMS_FOR_ORDER = "tag.no.free.rooms.for.order";
-    public static final String TAG_SELECT_ROOM_FOR_ORDER = "tag.select.room.for.order";
-    public static final String TAG_SELECT = "tag.select";
 
-    private static MessageManager instance;
     public static final String CREATE_EXIST_STUDENTGROUP_MESSAGE = "exception.create.group.exists.error.message";
     public static final String OPERATION_ERROR_MESSAGE = "exception.operation.error.message";
     public static final String CREATED_ADMIN_MESSAGE = "ok.created.admin.message";
     public static final String REMOVED_STUDENTGROUP_MESSAGE = "ok.removed.group.message";
+    public static final String EMPTYTESTTITLE_MESSAGE = "empty.title.error.message";
+    public static final String EMPTYTESTDESCRIPTION_MESSAGE = "empty.description.error.message";
+    public static final String NOT_ZERO_DURATION_MESSAGE = "not.zero.duraion.error.message";
+    public static final String TIME_ERROR_MESSAGE = "time.error.message";
 
+    private static MessageManager instance;
     private ResourceBundle resourceBundle;
     private HashMap<Locale, ResourceBundle> localeResourceBundle = new HashMap<Locale, ResourceBundle>();
 

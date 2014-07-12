@@ -168,4 +168,31 @@ class MySQLTutorDAO implements TutorDAO, IMySQLQueries {
         return tutor;
     }
 
+    @Override
+    public Tutor getByUserId(int userId) {
+        Tutor tutor = null;
+        try {
+            Connection myConnection = connPool.getConnection();
+            try (Statement statement = myConnection.createStatement()) {
+                PreparedStatement query
+                        = myConnection.prepareStatement(GET_TUTOR_BY_USERID);
+                query.setInt(1, userId);
+                ResultSet rs = query.executeQuery();
+                if (rs.next()) {
+                    tutor = new Tutor();
+                    tutor.setId(rs.getInt(ID));
+                    tutor.setUserId(rs.getInt(USER_ID));
+                    tutor.setInfo(rs.getString(INFO));
+                    tutor.setTelephone(rs.getString(TELEPHONE));
+                    tutor.setApproved(rs.getBoolean(IS_APPROVED));
+                }
+            } finally {
+                connPool.returnConnection(myConnection);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Exception.class.getName()).log(Level.ERROR, ex);
+        }
+        return tutor;
+    }
+
 }

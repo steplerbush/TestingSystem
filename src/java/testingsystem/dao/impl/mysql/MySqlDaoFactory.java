@@ -10,6 +10,7 @@ import testingsystem.dao.DAOFactory;
 import testingsystem.dao.intefaces.AnswerDAO;
 import testingsystem.dao.intefaces.AnswerLocaleDAO;
 import testingsystem.dao.intefaces.GroupTestDAO;
+import testingsystem.dao.intefaces.LocaleDAO;
 import testingsystem.dao.intefaces.QuestionDAO;
 import testingsystem.dao.intefaces.QuestionLocaleDAO;
 import testingsystem.dao.intefaces.ResultDAO;
@@ -89,6 +90,11 @@ public class MySqlDaoFactory extends DAOFactory {
     @Override
     public AnswerLocaleDAO createAnswerLocaleDAO() {
         return new MySQLAnswerLocaleDAO();
+    }
+
+    @Override
+    public LocaleDAO createLocaleDAO() {
+        return new MySQLLocaleDAO();
     }
 
 }

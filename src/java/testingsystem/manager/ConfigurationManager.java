@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
  */
 public class ConfigurationManager {
 
+    private static ConfigurationManager instance;
+    
     private static final String BUNDLE_NAME = "props/config";
     public static final String DAOFACTORY = "daofactory";
     public static final String CONTROLLER = "controller.path";
@@ -32,10 +34,8 @@ public class ConfigurationManager {
     public static final String ADMIN_HOME_PATH = "page.path.admin.home";
     public static String NEWBIE_PATH="/TestingSystem/site";
 
-    //public static final String USER_ROLE_ADMIN = "user.role.admin";
-    //public static final String USER_ROLE_TUTOR = "user.role.tutor";
-    //public static final String USER_ROLE_STUDENT = "user.role.student";
-    private static ConfigurationManager instance;
+    public static final String TUTOR_CREATE_TEST_PATH = "page.path.tutor.createtest";
+    public static final String TUTOR_CONTINUE_CREATE_TEST_PATH = "page.path.tutor.continuecreatetest";
 
     private ResourceBundle resourceBundle;
 

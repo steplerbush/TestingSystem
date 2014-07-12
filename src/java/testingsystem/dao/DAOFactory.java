@@ -16,13 +16,13 @@ import testingsystem.dao.intefaces.*;
 public abstract class DAOFactory {
 
     public abstract AnswerDAO createAnswerDAO();
-    
+
     public abstract AnswerLocaleDAO createAnswerLocaleDAO();
 
     public abstract GroupTestDAO createGroupTestDAO();
 
     public abstract QuestionDAO createQuestionDAO();
-    
+
     public abstract QuestionLocaleDAO createQuestionLocaleDAO();
 
     public abstract ResultDAO createResultDAO();
@@ -40,6 +40,8 @@ public abstract class DAOFactory {
     public abstract TestLocaleDAO createTestLocaleDAO();
 
     public abstract TutorDAO createTutorDAO();
+
+    public abstract LocaleDAO createLocaleDAO();
 
     public static DAOFactory getDAOFactory(String DAOFactoryName) {
         try {

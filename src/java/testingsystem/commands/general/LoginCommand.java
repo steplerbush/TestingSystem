@@ -7,8 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import testingsystem.controllers.FrontController;
 import testingsystem.controllers.RequestHelper;
-import testingsystem.dao.DAOFactory;
-import testingsystem.dao.intefaces.SiteRoleDAO;
 import testingsystem.manager.AttributesManager;
 import testingsystem.manager.ConfigurationManager;
 import testingsystem.manager.MessageManager;
@@ -85,8 +83,8 @@ public class LoginCommand implements ICommand {
                         + ". RemoteAddr: " + request.getRemoteAddr());
                 session.setAttribute(AttributesManager.ATTRIBUTE_USER_ROLE,
                         AttributesManager.TUTOR_ROLE);
-                session.setAttribute(AttributesManager.ATTRIBUTE_USER,
-                        siteUser);
+                session.setAttribute(AttributesManager.ATTRIBUTE_USER, 
+                        uBL.getTutor(siteUser));
                 session.setAttribute(AttributesManager.ATTRIBUTE_LOGIN,
                         login);
             } else {

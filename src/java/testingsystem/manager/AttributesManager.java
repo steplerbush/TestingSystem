@@ -25,6 +25,10 @@ public class AttributesManager {
     public static final String COMMAND_TUTOR_APPROVE = "tutorapprove";
     public static final String COMMAND_SHOW_SELECTED_GROUP = "showstudentgroup";
     public static final String COMMAND_ADMIN_CREAL_SESSION = "adminclearsession";
+    public static final String COMMAND_GO_CREATE_TEST = "gocreatetest";
+    public static final String COMMAND_CONTINUE_TEST_CREATION 
+            = "contintestcreation";
+    public static final String COMMAND_DO_CREATE_TEST = "docreatetest";
 
     public static final String ATTRIBUTE_YEAR = "year";
     public static final String ATTRIBUTE_RESULT = "result";
@@ -35,6 +39,7 @@ public class AttributesManager {
     public static final String ATTRIBUTE_OK_MESSAGE = "okMessage";
 
     public static final String ATTRIBUTE_USER = "user";
+    public static final String ATTRIBUTE_TUTOR = "tutor";
     public static final String ATTRIBUTE_REG_USER = "reguser";
     public static final String ATTRIBUTE_REG_USER_ROLE = "reguserrole";
     public static final String ATTRIBUTE_USER_ROLE = "userRole";
@@ -51,6 +56,7 @@ public class AttributesManager {
     public static final String ATTRIBUTE_REMOVE_GROUP = "delstudentgroup";
     public static final String ATTRIBUTE_SELECTED_STUDENTGROUP = "selectedgroup";
     public static final String ATTRIBUTE_SELECTED_GROUP_STUDENTS = "studentsselgr";
+    public static final String ATTRIBUTE_LANG_LIST = "langlist";
 
     public static final String PARAM_NAME_ACTION = "action";
     public static final String PARAM_NAME_SPECIAL_USER_LOCALE = "specialUserLocale";
@@ -64,7 +70,7 @@ public class AttributesManager {
     public static final String PARAM_NAME_TUTOR_INFO = "info";
     public static final String PARAM_NAME_STUDENT_GROUP = "studentgroup";
     public static final String PARAM_NAME_REG_USER_ROLE = "roleradios";
-    
+
     public static final String PARAM_ADM_LOGIN = "admlogin";
     public static final String PARAM_ADM_PASS = "admpassword";
     public static final String PARAM_ADM_FIRSTNAME = "admfirstname";
@@ -84,6 +90,17 @@ public class AttributesManager {
     public static final String PARAM_NAME_LOCALE = "locale";
     public static final String PARAM_GROUP_NAME = "groupname";
     public static final String PARAM_GROUP_NUMBER = "groupnumber";
+    
+    public static final String PARAM_SELECT_LANG ="selectLang";
+    
+    public static final String ATTRIBUTE_TEST_TITLE = "testTitle";
+    public static final String ATTRIBUTE_TEST_DESCRIPTION = "testdescription";
+    public static final String ATTRIBUTE_OPENING_TIME = "openingtime";
+    public static final String ATTRIBUTE_CLOSING_TIME = "closingtime";
+    public static final String ATTRIBUTE_DURATION = "duration";
+    public static final String DURATION_NULL = "00:00:00";
+    public static final String ATTRIBUTE_TEMPTEST = "temptest";
+    
 
     /**
      * Helper class, so private constructor.

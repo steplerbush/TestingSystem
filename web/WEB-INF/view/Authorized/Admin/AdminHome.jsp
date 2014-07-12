@@ -77,7 +77,6 @@
                                 <td>Email</td>
                             </tr>
                             <c:forEach items="${studentsselgr}" var="student">
-
                                 <tr>
                                     <td>${student.getUser().getLogin()}</td>
                                     <td><c:out value="${student.getUser().getFirstName()}" /></td>

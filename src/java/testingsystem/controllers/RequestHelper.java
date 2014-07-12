@@ -5,8 +5,10 @@
  */
 package testingsystem.controllers;
 
+import java.util.ArrayList;
 import testingsystem.manager.AttributesManager;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -19,6 +21,8 @@ import testingsystem.commands.admin.ShowSelectedGroupCommand;
 import testingsystem.commands.admin.TutorApproveCommand;
 import testingsystem.commands.admin.UnckeckedTutorShowCommand;
 import testingsystem.commands.general.*;
+import testingsystem.commands.tutor.ContinueTestCreationCommand;
+import testingsystem.commands.tutor.GoCreateTestCommand;
 
 /**
  *
@@ -86,6 +90,13 @@ public class RequestHelper {
                 new AdminClearSessionCommand());
         this.commandCatalog.put(AttributesManager.COMMAND_ADD_ADMIN,
                 new AdminRegisterCommand());
+
+        //tutor commands
+        this.commandCatalog.put(AttributesManager.COMMAND_GO_CREATE_TEST,
+                new GoCreateTestCommand());
+        this.commandCatalog.put(
+                AttributesManager.COMMAND_CONTINUE_TEST_CREATION,
+                new ContinueTestCreationCommand());
 
         // customer commands
 //        this.commandCatalog.put(AttributesManager.COMMAND_BOOKING_ROOM, new BookingRoomCommand());

@@ -190,4 +190,9 @@ public interface IMySQLQueries {
     public final static String DELETE_TUTORS
             = "DELETE FROM tutor WHERE id = ?";
     public final static String GET_TUTOR_BY_ID = "Select * from tutor where id = ?";
+    public final static String GET_TUTOR_BY_USERID = "Select * from tutor where user_id = ?";
+    
+    //locales
+    public static final String LOCCODE = "loccode";
+    public final static String SELECT_ALL_LOCALES = "Select * from lang";
 }

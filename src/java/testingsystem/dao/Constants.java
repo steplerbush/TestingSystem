@@ -15,7 +15,7 @@ public interface Constants {
     public static final String MYSQL_DAO_FACTORY = "MySQLDAOFactory";
     public static final String DB_URL = "jdbc:mysql://localhost:3306/testingsystemdb?useUnicode=true&characterEncoding=UTF-8";
     public static final String DB_USERNAME = "root";
-    public static final String DB_PASSWORD = "";
+    public static final String DB_PASSWORD = "root";
     public static final int DB_CONNLIFETIME = 30000;
     public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
     public static final Logger logger 

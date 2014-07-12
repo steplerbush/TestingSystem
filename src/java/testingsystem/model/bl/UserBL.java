@@ -5,10 +5,7 @@
  */
 package testingsystem.model.bl;
 
-import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import testingsystem.dao.DAOFactory;
 import testingsystem.dao.intefaces.SiteRoleDAO;
 import testingsystem.dao.intefaces.SiteUserDAO;
@@ -143,5 +140,11 @@ public class UserBL {
         siteUser.setId(siteUserDAO.insert(siteUser));
         t.setUserId(siteUser.getId());
         tutorDAO.insert(t);
+    }
+
+    public Tutor getTutor(SiteUser siteUser) {
+        Tutor tutor = tutorDAO.getByUserId(siteUser.getId());
+        tutor.setUser(siteUser);
+        return tutor;
     }
 }

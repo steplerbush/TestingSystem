@@ -25,4 +25,6 @@ public interface TutorDAO {
     void delete(Tutor tutor);
 
     public Tutor getById(int id);
+
+    public Tutor getByUserId(int userId);
 }

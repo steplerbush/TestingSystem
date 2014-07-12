@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import testingsystem.controllers.FrontController;
 import testingsystem.dao.DAOFactory;
 import testingsystem.manager.ConfigurationManager;
 import testingsystem.model.beans.Tutor;
